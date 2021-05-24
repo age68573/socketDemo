@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          color="primary"
+        > 
+          <v-list-item v-for="item in vList" :key="item.index" @click="itemClick" :to="item.title">
+            <v-list-item-icon>
+              <v-icon>{{item.icon}}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Demo</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
+      
+    </v-main>
+  </v-app>
   </div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Home from 'views/Home'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Home
+  },
+  data: () => ({
+    //
+    drawer: false,
+    group: null,
+    vList: [
+      {title: 'home', icon: 'mdi-home'},
+      {title: 'about', icon: 'mdi-home'},
+      {title: 'todolist', icon: 'mdi-home'}
+    ]
+  }),
+  methods: {
+    itemClick() {
+      console.log(this.$route);
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

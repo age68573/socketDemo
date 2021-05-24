@@ -9,5 +9,9 @@ module.exports = {
         'views': '@/views'
       }
     }
-  }
+  },
+
+  transpileDependencies: [
+    'vuetify'
+  ]
 }
