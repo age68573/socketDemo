@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.2",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
+    "vue-socket.io": "^3.0.10",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {

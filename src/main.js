@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
+import VueSocketIO from 'vue-socket.io'
 
 Vue.config.productionTip = false
 Vue.prototype.$getNowFormatDate =  function () {
@@ -19,6 +20,13 @@ Vue.prototype.$getNowFormatDate =  function () {
   var  currentdate = year + seperator1 + month + seperator1 + strDate;
   return  currentdate;
 };
+
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://localhost:3000',
+  vuex: {}
+}))
+
 new Vue({
   vuetify,
   render: h => h(App),
