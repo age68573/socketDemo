@@ -23,7 +23,7 @@ Vue.prototype.$getNowFormatDate =  function () {
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000',
+  connection: 'http://192.168.1.96:3000',
   vuex: {}
 }))
 
