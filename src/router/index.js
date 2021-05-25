@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 const Home = () => import('../views//home/Home')
 const About = () => import('../views/about/About')
 const ToDoList = () => import('../views/todolist/ToDoList')
+const Socket = () => import('../views/socket/Socket')
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,6 +19,10 @@ const routes = [
   {
     path: '/todolist',
     component: ToDoList
+  },
+  {
+    path: '/socket',
+    component: Socket
   }
 ]
 const router = new VueRouter({

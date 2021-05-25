@@ -54,7 +54,8 @@ export default {
     vList: [
       {title: 'home', icon: 'mdi-home'},
       {title: 'about', icon: 'mdi-home'},
-      {title: 'todolist', icon: 'mdi-home'}
+      {title: 'todolist', icon: 'mdi-home'},
+      {title: 'socket', icon: 'mdi-home'}
     ]
   }),
   methods: {
