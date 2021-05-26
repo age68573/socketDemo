@@ -3,7 +3,8 @@
     <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
-      app
+      absolute
+      temporary
     >
       <v-list
         nav
@@ -23,7 +24,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app v-if="!showBar">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Demo</v-toolbar-title>
@@ -58,6 +59,12 @@ export default {
       {title: 'socket', icon: 'mdi-home'}
     ]
   }),
+  computed: {
+    showBar() {
+      console.log(this.$route);
+      return this.$route.path === '/login'
+    }
+  },
   methods: {
     itemClick() {
       console.log(this.$route);
