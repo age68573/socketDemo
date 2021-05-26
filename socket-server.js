@@ -41,20 +41,39 @@ var io = require('socket.io')(http, {
   allowEIO3: true
 });
 
+allMsg = [];
+userName = [];
 io.on('connection', function(socket) {
   console.log('success');
+  socket.emit("allMessage", allMsg);
+  socket.on('sendNickName', (nickName) => {
+
+    let isSameName = userName.find((item) => {
+      return item.name === nickName.name
+    })
+    if (isSameName) { //有同名
+      // socket.emit("haveSameName") // 也同名就發射事件
+      socket.emit("haveSameName")
+    } else {
+      userName.push(nickName)
+      socket.emit("userCanSendMsg")
+    }
+    console.log(userName);
+  })
   socket.on('send', function(obj) {
-    console.log(obj.msg);
-    socket.broadcast.emit('other', {
-      msgg: obj.msg,
-      user: false,
-      time: time.setNowTimes()
-    });
-    socket.emit('self', {
-      msgg: obj.msg,
-      user: true,
-      time: time.setNowTimes()
-    });
+    console.log(obj);
+    class Info {
+      constructor(msgInfo) {
+        this.msgg = msgInfo.msg
+        this.user = msgInfo.user
+        this.time = time.setNowTimes()
+      }
+    }
+    info = new Info(obj)
+    socket.broadcast.emit('other', info);
+    socket.emit('self', info);
+    allMsg.push(info)
+    console.log(allMsg);
   });
 });
 
