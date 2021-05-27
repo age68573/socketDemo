@@ -11,8 +11,9 @@
             label="Account"
             :rules="rules"
             hide-details="auto"
+            v-model="loginForm.userName"
           ></v-text-field>
-          <v-text-field label="Password"></v-text-field>
+          <v-text-field label="Password" v-model="loginForm.passWord"></v-text-field>
         </v-col>
       </v-row>
       <v-row justify='center'>
@@ -23,6 +24,13 @@
             @click="handleLogin"
           >
             Login
+          </v-btn>
+          <v-btn
+            block
+            color="primary"
+            @click="removeCookie"
+          >
+            removeCookie
           </v-btn>
         </v-col>
         
@@ -35,7 +43,9 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
+  name: 'login',
   data: () => ({
     rules: [
         value => !!value || 'Required.',
@@ -47,6 +57,8 @@ export default {
       token: ''
     }
   }),
+  created() {
+  },
   methods: {
     handleLogin() {
       const token = 'asdfghjkl;'
@@ -62,9 +74,15 @@ export default {
 
       // cookie當中有token被設置才能改變路由
       if (Cookies.get('login') && this.loginForm.token) {
-        this.$router.push({name: 'Dashboard'})
+        this.$router.push({path: '/home'})
       }
+    },
+    removeCookie() {
+      Cookies.remove('login')
     }
+  },
+  activated() {
+    console.log('aaaa');
   }
 }
 </script>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Cookies from 'js-cookie'
 
 const Login = () => import('../views/login/Login')
 const Home = () => import('../views//home/Home')
@@ -9,6 +10,10 @@ const Socket = () => import('../views/socket/Socket')
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/login'
+  },
   {
     path: '/login',
     component: Login
@@ -47,18 +52,23 @@ router.beforeEach(async(to, from, next) => {
   if (to.meta.requireAuth) {
     // 獲取Cookies當中的login資訊並取得token
     const info = Cookies.get('login')
+    console.log(info, "info");
     const token = JSON.parse(info).token
     console.log(token)
     if (info) {
+      console.log(123);
       // 如果token不為空，且確實有這個欄位則讓路由變更
       if (token.length > 0 || token === undefined) {
+        console.log(1);
         next()
       } else {
+        console.log(2);
         // 未通過則導回login頁面
-        next({ name: 'Login' })
+        next({path: '/'})
       }
     } else {
-      next({ name: 'Login' })
+      console.log(3);
+      next({path: '/'})
     }
   } else {
     next()
