@@ -79,7 +79,7 @@ export default {
         console.log(res);
         this.$store.commit('getToken', res.token)
         console.log(this.$store.state);
-        if (Cookies.get('login') && this.$store.state.loginForm.token) {
+        if (Cookies.get('login') && this.$store.state.token) {
           this.$router.push({path: '/home'})
         }
       })
