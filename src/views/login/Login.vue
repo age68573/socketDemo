@@ -11,13 +11,20 @@
             label="Account"
             :rules="rules"
             hide-details="auto"
-            v-model="loginForm.userName"
+            v-model="userName"
           ></v-text-field>
-          <v-text-field label="Password" v-model="loginForm.passWord"></v-text-field>
+          <v-text-field label="Password" v-model="passWord"></v-text-field>
         </v-col>
       </v-row>
       <v-row justify='center'>
         <v-col cols="4">
+          <v-btn
+            block
+            color="primary"
+            @click="tryy"
+          >
+            try
+          </v-btn>
           <v-btn
             block
             color="primary"
@@ -44,6 +51,7 @@
 
 <script>
 import Cookies from 'js-cookie'
+import {loginApi} from 'network/login'
 export default {
   name: 'login',
   data: () => ({
@@ -55,11 +63,31 @@ export default {
       userName: '',
       passWord: '',
       token: ''
-    }
+    },
+    userName: '',
+    passWord: '',
   }),
   created() {
   },
   methods: {
+    tryy () {
+      console.log('in');
+      this.$store.state.loginForm.account = this.userName;
+      this.$store.state.loginForm.password = this.passWord;
+      if (this.$store.state.loginForm.account !== '' && this.$store.state.loginForm.password !== '') {
+        loginApi(this.$store.state.loginForm.account, this.$store.state.loginForm.password).then(res => {
+        console.log(res);
+        this.$store.commit('getToken', res.token)
+        console.log(this.$store.state);
+        if (Cookies.get('login') && this.$store.state.loginForm.token) {
+          this.$router.push({path: '/home'})
+        }
+      })
+      } else {
+        alert('帳號密碼不能為空')
+      }
+      
+    },
     handleLogin() {
       const token = 'asdfghjkl;'
       let userName = this.loginForm.userName;

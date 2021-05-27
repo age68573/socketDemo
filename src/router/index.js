@@ -53,8 +53,8 @@ router.beforeEach(async(to, from, next) => {
     // 獲取Cookies當中的login資訊並取得token
     const info = Cookies.get('login')
     console.log(info, "info");
-    const token = JSON.parse(info).token
-    console.log(token)
+    const token = info
+    console.log(token, "token")
     if (info) {
       console.log(123);
       // 如果token不為空，且確實有這個欄位則讓路由變更
@@ -74,5 +74,36 @@ router.beforeEach(async(to, from, next) => {
     next()
   }
 })
+
+// router.beforeEach(async(to, from, next) => {
+//   // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
+//   console.log('to: ', to)
+//   console.log('from: ', from)
+//   // 目的路由在meta上是否有設置requireAuth: true
+//   if (to.meta.requireAuth) {
+//     // 獲取Cookies當中的login資訊並取得token
+//     const info = Cookies.get('login')
+//     console.log(info, "info");
+//     const token = JSON.parse(info).token
+//     console.log(token)
+//     if (info) {
+//       console.log(123);
+//       // 如果token不為空，且確實有這個欄位則讓路由變更
+//       if (token.length > 0 || token === undefined) {
+//         console.log(1);
+//         next()
+//       } else {
+//         console.log(2);
+//         // 未通過則導回login頁面
+//         next({path: '/'})
+//       }
+//     } else {
+//       console.log(3);
+//       next({path: '/'})
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
