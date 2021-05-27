@@ -61,7 +61,6 @@ export default {
   }),
   computed: {
     showBar() {
-      // console.log(this.$route);
       return this.$route.path === '/login'
     }
   },
