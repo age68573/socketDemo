@@ -20,6 +20,7 @@
           <v-btn
             block
             color="primary"
+            @click="handleLogin"
           >
             Login
           </v-btn>
@@ -39,8 +40,32 @@ export default {
     rules: [
         value => !!value || 'Required.',
         value => (value && value.length >= 3) || 'Min 3 characters',
-    ]
-  })
+    ],
+    loginForm: {
+      userName: '',
+      passWord: '',
+      token: ''
+    }
+  }),
+  methods: {
+    handleLogin() {
+      const token = 'asdfghjkl;'
+      let userName = this.loginForm.userName;
+      let passWord = this.loginForm.passWord;
+      if (userName !== '' && passWord !== '') {
+        this.loginForm.token = token;
+      } else {
+        alert('帳號密碼不能為空')
+      }
+      Cookies.set('login', JSON.stringify(this.loginForm), { expires: 1 })
+      console.log(this.loginForm)
+
+      // cookie當中有token被設置才能改變路由
+      if (Cookies.get('login') && this.loginForm.token) {
+        this.$router.push({name: 'Dashboard'})
+      }
+    }
+  }
 }
 </script>
 
