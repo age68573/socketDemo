@@ -61,13 +61,13 @@ export default {
   }),
   computed: {
     showBar() {
-      console.log(this.$route);
+      // console.log(this.$route);
       return this.$route.path === '/login'
     }
   },
   methods: {
     itemClick() {
-      console.log(this.$route);
+      // console.log(this.$route);
     }
   }
 };
