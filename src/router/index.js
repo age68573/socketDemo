@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Cookies from 'js-cookie'
 
-const Login = () => import('../views/login/Login')
+const Login = () => import('../views/login/Login2')
 const Home = () => import('../views//home/Home')
 const About = () => import('../views/about/About')
 const ToDoList = () => import('../views/todolist/ToDoList')
