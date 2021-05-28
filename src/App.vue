@@ -28,6 +28,8 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Demo</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn @click="logOut">Logout</v-btn>
     </v-app-bar>
 
     <v-main>
@@ -43,6 +45,7 @@
 
 <script>
 import Home from 'views/Home'
+import Cookies from 'js-cookie'
 export default {
   name: 'App',
   components: {
@@ -67,6 +70,10 @@ export default {
   methods: {
     itemClick() {
       // console.log(this.$route);
+    },
+    logOut() {
+      Cookies.remove('login')
+      this.$router.go('/')
     }
   }
 };
