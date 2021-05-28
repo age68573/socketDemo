@@ -57,9 +57,9 @@ export default {
     group: null,
     vList: [
       {title: 'home', icon: 'mdi-home'},
-      {title: 'about', icon: 'mdi-home'},
-      {title: 'todolist', icon: 'mdi-home'},
-      {title: 'socket', icon: 'mdi-home'}
+      {title: 'about', icon: 'mdi-account'},
+      {title: 'todolist', icon: 'mdi-pencil'},
+      {title: 'socket', icon: 'mdi-message-text'}
     ]
   }),
   computed: {
