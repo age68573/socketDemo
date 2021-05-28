@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Cookies from 'js-cookie'
+import NProgress from 'nprogress'
 
 const Login = () => import('../views/login/Login2')
 const Home = () => import('../views//home/Home')
@@ -45,6 +46,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async(to, from, next) => {
+  NProgress.start()
   // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
   console.log('to: ', to)
   console.log('from: ', from)
@@ -67,6 +69,7 @@ router.beforeEach(async(to, from, next) => {
         next({path: '/'})
       }
     } else {
+      
       console.log(3);
       next({path: '/'})
     }
